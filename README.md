@@ -13,7 +13,7 @@
 [![Build Status](https://travis-ci.org/anka1928/project-lvl4-s415.svg?branch=master)](https://travis-ci.org/anka1928/project-lvl4-s415)
 
 
-## Ссылка на проект [slack-chat](http://)
+## Ссылка на проект [slack-chat](https://light-chat-anka1928.herokuapp.com/)
 
 ### Цель проекта
 В 4 проекте задействованы все изучаемые раньше технологии, активное взаимодействие с бекендом (сервисы) и вебсокеты для построения real-time приложения.
