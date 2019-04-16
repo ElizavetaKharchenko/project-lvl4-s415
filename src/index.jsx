@@ -7,36 +7,40 @@ import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 import '../assets/application.css';
 import gon from 'gon';
+import faker from 'faker';
+import cookies from 'js-cookie';
+import io from 'socket.io-client';
 
 import App from './components/app';
 import reducers from './reducers';
-
-// import faker from 'faker';
-
-// import cookies from 'js-cookie';
-// import io from 'socket.io-client';
+import * as actions from './actions';
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-/* eslint-disable no-underscore-dangle */
-const ext = window.__REDUX_DEVTOOLS_EXTENSION__;
-const devtoolMiddleware = ext && ext();
-/* eslint-enable */
-
 const initState = ({ channels, messages, currentChannelId }) => (
   { channels, messages, currentChannelId }
 );
+
+const socket = io('/');
+
 
 const store = createStore(
   reducers,
   { ...initState(gon) },
   compose(
     applyMiddleware(thunk),
-    devtoolMiddleware,
+    /* eslint-disable no-underscore-dangle */
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
+    /* eslint-enable */
   ),
 );
+
+socket.on('newMessage', (data) => {
+  store.dispatch(actions.addMessageSuccess({ message: data }));
+});
+
 
 render(
   <Provider store={store}>

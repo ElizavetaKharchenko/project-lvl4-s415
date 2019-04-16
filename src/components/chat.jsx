@@ -7,7 +7,7 @@ const mapStateToProps = state => ({ messages: state.messages });
 @connect(mapStateToProps)
 class Chat extends React.Component {
   messagesRender = ({ name, text, id }) => {
-    return <li className="list-group-item" />;
+    return <li className="list-group-item">{text}</li>;
   }
 
   render() {

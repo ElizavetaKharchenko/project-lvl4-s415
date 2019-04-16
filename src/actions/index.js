@@ -11,8 +11,7 @@ export const addMessage = data => async (dispatch) => {
   dispatch(addMessageRequest());
   try {
     const url = routes.messages(data.params.channelId);
-    const response = await axios.post(url, { data });
-    dispatch(addMessageSuccess({ message: response.data }));
+    await axios.post(url, { data });
   } catch (e) {
     dispatch(addMessageFailure());
     throw e;
