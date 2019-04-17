@@ -23,8 +23,10 @@ const initState = ({ channels, messages, currentChannelId }) => (
   { channels, messages, currentChannelId }
 );
 
-const socket = io('/');
+const name = faker.name.findName();
+cookies.set('name', name, { expires: 7 });
 
+const UserNameContext = React.createContext(name);
 
 const store = createStore(
   reducers,
@@ -37,6 +39,8 @@ const store = createStore(
   ),
 );
 
+const socket = io('/');
+
 socket.on('newMessage', (data) => {
   store.dispatch(actions.addMessageSuccess({ message: data }));
 });
@@ -44,7 +48,9 @@ socket.on('newMessage', (data) => {
 
 render(
   <Provider store={store}>
-    <App />
+    <UserNameContext.Consumer>
+      {value => (<App userName={value} />)}
+    </UserNameContext.Consumer>
   </Provider>,
   document.getElementById('chat'),
 );

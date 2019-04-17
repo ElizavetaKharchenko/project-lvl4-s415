@@ -6,22 +6,28 @@ const mapStateToProps = state => ({ messages: state.messages });
 
 @connect(mapStateToProps)
 class Chat extends React.Component {
-  messagesRender = ({ name, text, id }) => {
-    return <li className="list-group-item">{text}</li>;
-  }
+  messagesRender = ({ text, name }) => (
+    <li className="list-group-item">
+      {`${name}: `}
+      {text}
+    </li>
+  );
 
   render() {
     const { messages } = this.props;
-    if (messages.length === 0) {
-      return null;
-    }
 
     return (
-      <div className="h-75">
+      <div className="h-75 mb-3">
         <p>Messages</p>
-        <ul className="list-group-flush pl-0">
-          {messages.map(this.messagesRender)}
-        </ul>
+        <div className="overflow-auto h-100">
+          {messages.length !== 0
+          && (
+          <ul className="list-group-flush h-100 pl-0">
+            {messages.map(this.messagesRender)}
+          </ul>
+          )
+        }
+        </div>
       </div>
     );
   }

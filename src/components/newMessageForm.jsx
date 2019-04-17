@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 import * as actions from '../actions';
 
@@ -21,8 +21,13 @@ class NewMessageForm extends React.Component {
   }
 
   handleSubmit = async ({ text }) => {
-    const { addMessage, reset, channelId } = this.props;
-    const name = 'anonim';
+    const {
+      addMessage,
+      reset,
+      channelId,
+      name,
+    } = this.props;
+
     const data = { attributes: { text, name }, params: { channelId } };
     try {
       await addMessage(data);
@@ -38,7 +43,7 @@ class NewMessageForm extends React.Component {
       handleSubmit, submitting, pristine, error,
     } = this.props;
     return (
-      <form className="form-inline" onSubmit={handleSubmit(this.handleSubmit)}>
+      <form className="form-inline h-25" onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="form-group mx-3">
           <Field
             name="text"
@@ -51,7 +56,7 @@ class NewMessageForm extends React.Component {
             autoFocus={!submitting}
           />
         </div>
-        <input type="submit" disabled={pristine || submitting} className="btn btn-primary btn-sm" value="Send" />
+        <input type="submit" disabled={pristine || submitting} className="btn btn-primary" value="Send" />
         {error && <div className="ml-3">{error}</div>}
       </form>
     );
