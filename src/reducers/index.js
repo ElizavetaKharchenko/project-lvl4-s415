@@ -7,7 +7,7 @@ import * as actions from '../actions';
 
 const messages = handleActions({
   [actions.addMessageSuccess]:
-    (state, { payload: { message: { data } } }) => ([...state, data.attributes]),
+    (state, { payload: { message } }) => ([...state, message]),
 }, {});
 
 const channels = (state = {}) => state;

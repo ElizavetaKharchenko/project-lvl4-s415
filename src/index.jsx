@@ -38,11 +38,11 @@ const store = createStore(
     /* eslint-enable */
   ),
 );
-console.log(name);
+
 const socket = io('/');
 
-socket.on('newMessage', (data) => {
-  store.dispatch(actions.addMessageSuccess({ message: data }));
+socket.on('newMessage', ({ data }) => {
+  store.dispatch(actions.addMessageSuccess({ message: data.attributes }));
 });
 
 
