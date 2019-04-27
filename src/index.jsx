@@ -23,8 +23,8 @@ const initState = ({ channels, messages, currentChannelId }) => (
   { channels, messages, currentChannelId }
 );
 
-const name = faker.name.findName();
-cookies.set('name', name, { expires: 7 });
+const name = cookies.get('name') ? cookies.get('name') : faker.name.findName();
+cookies.set('name', name);
 
 const UserNameContext = React.createContext(name);
 
@@ -38,7 +38,7 @@ const store = createStore(
     /* eslint-enable */
   ),
 );
-
+console.log(name);
 const socket = io('/');
 
 socket.on('newMessage', (data) => {
