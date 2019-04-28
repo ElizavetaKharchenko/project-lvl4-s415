@@ -1,19 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 // import _ from 'lodash';
-
-import * as actions from '../actions';
+import connect from '../connect';
 
 const mapStateToProps = state => ({
   message: state.messages,
   channelId: state.currentChannelId,
 });
 
-const actionCreators = {
-  addMessage: actions.addMessage,
-};
-
+@connect(mapStateToProps)
+@reduxForm({ form: 'newMessage' })
 class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
@@ -63,7 +59,4 @@ class NewMessageForm extends React.Component {
   }
 }
 
-const ConnectedNewMessageForm = connect(mapStateToProps, actionCreators)(NewMessageForm);
-export default reduxForm({
-  form: 'newMessage',
-})(ConnectedNewMessageForm);
+export default NewMessageForm;

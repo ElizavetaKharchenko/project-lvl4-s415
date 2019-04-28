@@ -1,15 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import connect from '../connect';
 
-const mapStateToProps = (state) => {
-  return {
-    channels: state.channels,
-    //channelId: state.currentChannelId,
-  };
-};
+const mapStateToProps = state => ({ channels: state.channels });
 
 @connect(mapStateToProps)
-
 class ChannelsList extends React.Component {
   channelsRender = (channels) => {
     if (channels.length === 0) {
