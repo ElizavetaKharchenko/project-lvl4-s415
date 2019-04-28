@@ -2,7 +2,8 @@ import '@babel/polyfill';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { render } from 'react-dom';
 import thunk from 'redux-thunk';
 import '../assets/application.css';
@@ -31,11 +32,8 @@ const UserNameContext = React.createContext(name);
 const store = createStore(
   reducers,
   { ...initState(gon) },
-  compose(
+  composeWithDevTools(
     applyMiddleware(thunk),
-    /* eslint-disable no-underscore-dangle */
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
-    /* eslint-enable */
   ),
 );
 
