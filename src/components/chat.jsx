@@ -2,12 +2,15 @@ import React from 'react';
 import connect from '../connect';
 
 
-const mapStateToProps = state => ({ messages: state.messages });
+const mapStateToProps = state => ({
+  currentChannel: state.currentChannelId,
+  messages: state.messages.filter(({ channelId }) => channelId === state.currentChannelId),
+});
 
 @connect(mapStateToProps)
 class Chat extends React.Component {
-  messagesRender = ({ text, name }) => (
-    <li className="list-group-item">
+  messagesRender = ({ text, name, id }) => (
+    <li className="list-group-item" role="tabpanel" key={id}>
       {`${name}: `}
       {text}
     </li>

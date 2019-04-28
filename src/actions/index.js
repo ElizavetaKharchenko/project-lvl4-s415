@@ -6,6 +6,8 @@ import routes from '../routes';
 export const addMessageSuccess = createAction('MESSAGE_ADD_SUCCESS');
 export const addMessageFailure = createAction('MESSAGE_ADD_FAILURE');
 
+export const changeChannel = createAction('CHANGE_CHANNEL');
+
 export const addMessage = data => async (dispatch) => {
   try {
     const url = routes.messages(data.params.channelId);
