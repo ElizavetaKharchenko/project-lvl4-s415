@@ -44,8 +44,8 @@ socket.on('connect', () => {
   socket.on('newMessage', ({ data }) => store.dispatch(actions.addMessageSuccess({ message: data.attributes })));
   socket.on('newChannel', ({ data }) => store.dispatch(actions.addChannelSuccess({ name: data.attributes })));
   socket.on('removeChannel', ({ data }) => store.dispatch(actions.deleteChannelSuccess({ channelId: data.id })));
+  socket.on('renameChannel', ({ data }) => store.dispatch(actions.renameChannelSuccess({ channelId: data.id, newName: data.attributes.name })));
 });
-
 
 render(
   <Provider store={store}>

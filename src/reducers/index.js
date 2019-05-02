@@ -17,6 +17,9 @@ const channels = handleActions({
     (state, { payload: { name } }) => ([...state, name]),
   [actions.deleteChannelSuccess]:
     (state, { payload: { channelId } }) => (state.filter(({ id }) => channelId !== id)),
+  [actions.renameChannelSuccess]:
+    (state, { payload: { channelId, newName } }) => state.map(channel => (channel.id === channelId
+      ? { ...channel, name: newName } : channel)),
 }, {});
 
 const currentChannelId = handleActions({

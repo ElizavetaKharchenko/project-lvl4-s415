@@ -1,6 +1,5 @@
 import React from 'react';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-// import _ from 'lodash';
 import connect from '../connect';
 
 const mapStateToProps = state => ({

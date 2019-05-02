@@ -1,6 +1,5 @@
 import { Modal, Button } from 'react-bootstrap';
 import React from 'react';
-// import { Field, reduxForm, SubmissionError } from 'redux-form';
 
 import connect from '../../connect';
 

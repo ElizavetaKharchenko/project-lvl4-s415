@@ -4,7 +4,7 @@ import ChannelsList from './channelsList';
 import Chat from './chat';
 import NewMessageForm from './newMessageForm';
 import AddNewChannel from './modals/addNewChannel';
-// import RenameChannel from './modals/renameChannel';
+import RenameChannel from './modals/renameChannel';
 import DeleteChannel from './modals/deleteChannel';
 
 
@@ -21,9 +21,8 @@ const App = ({ userName }) => (
     </div>
     <AddNewChannel />
     <DeleteChannel />
+    <RenameChannel />
   </>
 );
 
 export default App;
-
-// <RenameChannel />
