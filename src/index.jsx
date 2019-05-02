@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -39,8 +40,10 @@ const store = createStore(
 
 const socket = io('/');
 
-socket.on('newMessage', ({ data }) => {
-  store.dispatch(actions.addMessageSuccess({ message: data.attributes }));
+socket.on('connect', () => {
+  socket.on('newMessage', ({ data }) => store.dispatch(actions.addMessageSuccess({ message: data.attributes })));
+  socket.on('newChannel', ({ data }) => store.dispatch(actions.addChannelSuccess({ name: data.attributes })));
+  socket.on('removeChannel', ({ data }) => store.dispatch(actions.deleteChannelSuccess({ channelId: data.id })));
 });
 
 
