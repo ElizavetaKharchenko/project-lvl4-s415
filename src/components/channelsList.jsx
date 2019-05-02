@@ -1,12 +1,11 @@
 import React from 'react';
 import connect from '../connect';
 
-const mapStateToProps = (state) => {
-  return ({
-    channels: state.channels,
-    currentChannel: state.currentChannelId,
-  });
-};
+const mapStateToProps = state => ({
+  channels: state.channels,
+  currentChannel: state.currentChannelId,
+});
+
 
 @connect(mapStateToProps)
 class ChannelsList extends React.Component {
