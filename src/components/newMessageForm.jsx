@@ -3,7 +3,6 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import connect from '../connect';
 
 const mapStateToProps = state => ({
-  message: state.messages,
   channelId: state.currentChannelId,
 });
 
@@ -13,6 +12,10 @@ class NewMessageForm extends React.Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
+  }
+
+  componentDidUpdate() {
+    this.textInput.current.getRenderedComponent().focus();
   }
 
   handleSubmit = async ({ text }) => {
@@ -30,7 +33,6 @@ class NewMessageForm extends React.Component {
       throw new SubmissionError({ _error: e.message });
     }
     reset();
-    this.textInput.current.getRenderedComponent().focus();
   }
 
   render() {
